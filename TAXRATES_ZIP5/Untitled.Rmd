@@ -1,0 +1,58 @@
+---
+title: "Untitled"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+\section{Exercise from Textbook}
+
+\parabf{
+10.1 Reflecting random walks: It is often useful in MCMC to have a proposal distribution which is both symmetric and has support only on a certain region. For example, if we know $\theta > 0$, we would like our proposal distribution $J(\theta_1 \mid \theta_0)$ to have support on positive $\theta$ values. Consider the following proposal algorithm:
+\begin{itemize}
+\item
+sample $\tilde\theta \sim \cU(\theta_0 - \delta, \theta_0 + \delta)$;
+\item
+if $\tilde\theta < 0$, set $\theta_1 = - \tilde\theta$;
+\item
+if $\tilde\theta \ge 0$, set $\theta_1 = - \tilde\theta$.
+\end{itemize}
+In other words, $\theta_1 = \abs{\tilde\theta}$. Show that the above algorithm draws samples from a symmetric proposal distribution which has support on positive values of $\theta$. It may be helpful to write out the associated proposal density $J(\theta_1 \mid \theta_0)$ under the two conditions $\theta_0 \le \delta$ and $\theta_0 > \delta$ separately.
+}
+
+The basic idea here is that, if $\theta_1$ is reachable from $\theta_0$ by reflecting at 0, then $\theta_0 + \theta_1 < \delta$, which also means that $\theta_0$ is reachable from $\theta_1$ by reflecting at 0. Similarly, if $\theta_1$ cannot be reached by reflection from $\theta_0$, then $\theta_0 + \theta_1 \ge \delta$ and $\theta_0$ also cannot be reached by reflection from $\theta_1$. Therefore, the associated proposal density is
+$$
+J(\theta_1 \mid \theta_0)
+=
+\left\{\begin{matrix}
+1 / (2\delta) & \text{if $\theta_0 + \theta_1 \ge \delta$} \\
+1 / \delta & \text{if $\theta_0 + \theta_1 < \delta$}
+\end{matrix}\right.
+$$
+We can see that the position of $\theta_0$ and $\theta_1$ in this proposal density is exchangeable, which directly leads to the fact that this is a symmetric proposal distribution.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
